@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.fancy-text {
+  font-family: 'Imperial Script', cursive;
+  letter-spacing: 2px;
+}
