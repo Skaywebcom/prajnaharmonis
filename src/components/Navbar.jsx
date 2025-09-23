@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence, animate } from "frame
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("beranda");
   const { scrollY } = useScroll();
   
   // Transform navbar background opacity based on scroll
@@ -65,6 +66,28 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+  const sections = document.querySelectorAll("section[id]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  return () => {
+    sections.forEach((section) => observer.unobserve(section));
+  };
+}, []);
+
 
   // Animation variants
   const navbarVariants = {
@@ -263,20 +286,21 @@ const Navbar = () => {
             custom={index}
           >
             <motion.button
-              onClick={() => scrollToSection(link.id)}
-              className="cursor-pointer relative group px-4 py-2.5 rounded-xl transition-all duration-300 font-semibold text-sm lg:text-base"
-              whileHover={{ 
-                scale: 1.05,
-                y: -2,
-                color: "#228B22",
-                transition: { duration: 0.1, type: "spring" }
-              }}
-              whileTap={{ scale: 0.95, y: 0 }}
-              animate={{
-                color: isScrolled ? "#2D4A22" : "#1F2937"
-              }}
-            >
-              {link.label}
+  onClick={() => scrollToSection(link.id)}
+  className={`cursor-pointer relative group px-4 py-2.5 rounded-xl transition-all duration-300 font-semibold text-sm lg:text-base ${
+    activeSection === link.id
+      ? "text-green-700 font-bold"
+      : "text-gray-700"
+  }`}
+  whileHover={{ 
+    scale: 1.05,
+    y: -2,
+    color: "#228B22",
+    transition: { duration: 0.1, type: "spring" }
+  }}
+  whileTap={{ scale: 0.95, y: 0 }}
+>
+  {link.label}
               
               {/* Half underline with green leaf color */}
               <motion.div
@@ -422,7 +446,9 @@ const Navbar = () => {
                       scrollToSection(link.id);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="block w-full text-left px-8 py-4 text-gray-700 font-medium rounded-r-2xl mx-2 transition-all duration-300 relative overflow-hidden"
+                    className={`block w-full text-left px-8 py-4 font-medium rounded-r-2xl mx-2 transition-all duration-300 relative overflow-hidden ${
+  activeSection === link.id ? "text-green-700 font-bold" : "text-gray-700"
+}`}
                     whileHover={{ 
                       x: 12,
                       backgroundColor: "rgba(34, 139, 34, 0.08)",

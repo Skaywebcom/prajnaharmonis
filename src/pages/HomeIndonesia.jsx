@@ -21,25 +21,43 @@ const HomeIndonesia = () => {
   return (
     <div className="font-sans">
       <Navbar />
-      <SectionBeranda />
-      <SectionTentang />
-      <SectionSambutan />
-      <SectionKedamaian />
-      <SectionVisiMisi />
-      <StrukturOrganisasi />
-      <SectionBudaya />
-      <SectionArtikel />
-      <SectionPendidikan />
-      <SectionPendidikanEtika />
-      <SectionPendidikanMandarin />
-      <SectionKegiatan />
-      <SectionMitra />
-      <SectionMitraSekolah />
-      <SectionContact />
+
+      <section id="beranda" className="scroll-mt-20">
+        <SectionBeranda />
+      </section>
+
+      <section id="tentang" className="scroll-mt-20">
+        <SectionTentang />
+        <SectionSambutan />
+        <SectionKedamaian />
+        <SectionVisiMisi />
+        <StrukturOrganisasi />
+      </section>
+
+      <section id="budaya" className="scroll-mt-20">
+        <SectionBudaya />
+        <SectionArtikel />
+      </section>
+
+      <section id="pendidikan" className="scroll-mt-20">
+        <SectionPendidikan />
+        <SectionPendidikanEtika />
+        <SectionPendidikanMandarin />
+      </section>
+
+      <section id="kegiatan" className="scroll-mt-20">
+        <SectionKegiatan />
+        <SectionMitra />
+        <SectionMitraSekolah />
+      </section>
+
+      <section id="hubungi" className="scroll-mt-20">
+        <SectionContact />
+      </section>
+
       <Footer />
     </div>
   );
 };
 
 export default HomeIndonesia;
-

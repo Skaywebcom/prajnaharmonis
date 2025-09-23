@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade } from "swiper/modules";
+import { Link } from "react-router-dom"; // <- import Link
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
@@ -213,15 +214,15 @@ const SectionKegiatan = () => {
 
                       {/* CTA Button */}
                       <div className="mt-auto">
-                        <a
-                          href={item.link}
-                          className="group/button inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-green-500 text-black font-semibold rounded-xl hover:from-yellow-300 hover:to-green-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/25 transform hover:scale-105"
-                        >
+                        <Link
+                        to={item.link} // <- pakai Link dari react-router-dom
+                        className="group/button inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-green-500 text-black font-semibold rounded-xl hover:from-yellow-300 hover:to-green-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/25 transform hover:scale-105"
+                      >
                           <span className="text-sm tracking-wide">BACA SELENGKAPNYA</span>
                           <svg className="w-4 h-4 transition-transform duration-300 group-hover/button:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                           </svg>
-                        </a>
+                        </Link>
                       </div>
                     </div>
 
