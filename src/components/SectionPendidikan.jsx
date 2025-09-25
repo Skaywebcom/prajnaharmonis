@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const SectionPendidikan = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
+  const [paragraphsVisible, setParagraphsVisible] = useState([]);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const paragraphRefs = useRef([]);
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -10,27 +15,73 @@ const SectionPendidikan = () => {
     link.rel = "stylesheet";
     document.head.appendChild(link);
 
-    // Intersection Observer for animations
-    const observer = new IntersectionObserver(
+    // Enhanced Intersection Observer for header animations - always re-render
+    const headerObserver = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { 
+        threshold: [0.1, 0.2, 0.3],
+        rootMargin: "-10% 0px -10% 0px"
+      }
     );
 
-    const section = document.getElementById("pendidikan");
-    if (section) {
-      observer.observe(section);
+    // Enhanced Intersection Observer for content animations - always re-render
+    const contentObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsContentVisible(entry.isIntersecting);
+      },
+      { 
+        threshold: [0.2, 0.3, 0.4],
+        rootMargin: "-20% 0px -20% 0px"
+      }
+    );
+
+    // Individual paragraph observers for sequential animations
+    const paragraphObservers = [];
+    paragraphRefs.current.forEach((ref, index) => {
+      if (ref) {
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            setParagraphsVisible(prev => {
+              const newState = [...prev];
+              newState[index] = entry.isIntersecting;
+              return newState;
+            });
+          },
+          {
+            threshold: [0.3, 0.4, 0.5],
+            rootMargin: "-15% 0px -15% 0px"
+          }
+        );
+        observer.observe(ref);
+        paragraphObservers.push(observer);
+      }
+    });
+
+    if (sectionRef.current) {
+      headerObserver.observe(sectionRef.current);
+    }
+    if (contentRef.current) {
+      contentObserver.observe(contentRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      headerObserver.disconnect();
+      contentObserver.disconnect();
+      paragraphObservers.forEach(observer => observer.disconnect());
+    };
   }, []);
+
+  // Initialize paragraph refs
+  const setParagraphRef = (el, index) => {
+    paragraphRefs.current[index] = el;
+  };
 
   return (
     <section
       id="pendidikan"
+      ref={sectionRef}
       className="relative min-h-screen bg-gradient-to-br from-slate-800 via-gray-900 to-slate-800 overflow-hidden"
     >
       {/* Background Image with Overlay */}
@@ -62,15 +113,16 @@ const SectionPendidikan = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-6 py-20">
-        {/* Header Section */}
+        {/* Header Section with enhanced re-rendering animations */}
         <div className={`text-center mb-16 transform transition-all duration-1000 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
-          
 
           {/* Main Title */}
           <h2
-            className="text-5xl md:text-6xl lg:text-7xl mb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400"
+            className={`text-5xl md:text-6xl lg:text-7xl mb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400 transform transition-all duration-1200 delay-200 ${
+              isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'
+            }`}
             style={{
               fontFamily: "'Great Vibes', cursive",
               paddingTop: "0.25em",
@@ -82,7 +134,9 @@ const SectionPendidikan = () => {
 
           {/* Subtitle */}
           <h3 
-            className="text-2xl md:text-3xl text-gray-200 mb-2"
+            className={`text-2xl md:text-3xl text-gray-200 mb-2 transform transition-all duration-1000 delay-400 ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+            }`}
             style={{
               fontFamily: "Playfair Display, serif",
               textShadow: "1px 1px 4px rgba(0,0,0,0.5)",
@@ -92,22 +146,32 @@ const SectionPendidikan = () => {
           </h3>
 
           {/* Decorative Divider */}
-          <div className="w-32 h-1 bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400 mx-auto rounded-full"></div>
+          <div className={`w-32 h-1 bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400 mx-auto rounded-full transform transition-all duration-800 delay-600 ${
+            isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
+          }`}></div>
         </div>
 
-        {/* Main Article Content */}
-        <div className="max-w-5xl mx-auto -mt-8">
-          <div className={`transform transition-all duration-1000 delay-500 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        {/* Main Article Content with enhanced re-rendering animations */}
+        <div className="max-w-5xl mx-auto -mt-8" ref={contentRef}>
+          <div className={`transform transition-all duration-1000 ${
+            isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             {/* Article Container */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
-              
+            <div className={`bg-white/10 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl transform transition-all duration-1200 delay-200 ${
+              isContentVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-98'
+            }`}>
 
-              {/* Article Content */}
+              {/* Article Content with sequential paragraph animations */}
               <div className="prose prose-lg max-w-none">
                 <div className="space-y-8 text-gray-200 leading-relaxed text-lg text-justify" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <p className="relative pl-6 border-l-4 border-yellow-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm">
+                  
+                  {/* Paragraph 1 */}
+                  <p 
+                    ref={(el) => setParagraphRef(el, 0)}
+                    className={`relative pl-6 border-l-4 border-yellow-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm transform transition-all duration-800 delay-500 ${
+                      paragraphsVisible[0] ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                    }`}
+                  >
                     <span className="absolute -left-3 top-6 w-6 h-6 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
                       <span className="w-2 h-2 bg-white rounded-full"></span>
                     </span>
@@ -120,7 +184,13 @@ const SectionPendidikan = () => {
                     terus berlanjut, konsekuensinya tidak terbayangkan.
                   </p>
 
-                  <p className="relative pl-6 border-l-4 border-green-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm">
+                  {/* Paragraph 2 */}
+                  <p 
+                    ref={(el) => setParagraphRef(el, 1)}
+                    className={`relative pl-6 border-l-4 border-green-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm transform transition-all duration-800 delay-700 ${
+                      paragraphsVisible[1] ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                    }`}
+                  >
                     <span className="absolute -left-3 top-6 w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
                       <span className="w-2 h-2 bg-white rounded-full"></span>
                     </span>
@@ -136,7 +206,13 @@ const SectionPendidikan = () => {
                     yang berkepanjangan.
                   </p>
 
-                  <p className="relative pl-6 border-l-4 border-amber-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm">
+                  {/* Paragraph 3 */}
+                  <p 
+                    ref={(el) => setParagraphRef(el, 2)}
+                    className={`relative pl-6 border-l-4 border-amber-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm transform transition-all duration-800 delay-900 ${
+                      paragraphsVisible[2] ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                    }`}
+                  >
                     <span className="absolute -left-3 top-6 w-6 h-6 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full flex items-center justify-center">
                       <span className="w-2 h-2 bg-white rounded-full"></span>
                     </span>
@@ -145,7 +221,13 @@ const SectionPendidikan = () => {
                     memiliki jiwa, namun bagaimanakah mengaplikasikan jiwa dalam dirinya?
                   </p>
 
-                  <p className="relative pl-6 border-l-4 border-yellow-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm">
+                  {/* Paragraph 4 */}
+                  <p 
+                    ref={(el) => setParagraphRef(el, 3)}
+                    className={`relative pl-6 border-l-4 border-yellow-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm transform transition-all duration-800 delay-1100 ${
+                      paragraphsVisible[3] ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                    }`}
+                  >
                     <span className="absolute -left-3 top-6 w-6 h-6 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
                       <span className="w-2 h-2 bg-white rounded-full"></span>
                     </span>
@@ -158,7 +240,13 @@ const SectionPendidikan = () => {
                     menginsafi dan meyakini dengan sepenuh hati.
                   </p>
 
-                  <p className="relative pl-6 border-l-4 border-green-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm">
+                  {/* Paragraph 5 */}
+                  <p 
+                    ref={(el) => setParagraphRef(el, 4)}
+                    className={`relative pl-6 border-l-4 border-green-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm transform transition-all duration-800 delay-1300 ${
+                      paragraphsVisible[4] ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                    }`}
+                  >
                     <span className="absolute -left-3 top-6 w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center">
                       <span className="w-2 h-2 bg-white rounded-full"></span>
                     </span>
@@ -172,7 +260,13 @@ const SectionPendidikan = () => {
                     setiap anak didik yang sangat dihormati.
                   </p>
 
-                  <p className="relative pl-6 border-l-4 border-amber-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm text-xl leading-relaxed">
+                  {/* Final Paragraph */}
+                  <p 
+                    ref={(el) => setParagraphRef(el, 5)}
+                    className={`relative pl-6 border-l-4 border-amber-400/50 bg-white/5 p-6 rounded-r-xl backdrop-blur-sm text-xl leading-relaxed transform transition-all duration-800 delay-1500 ${
+                      paragraphsVisible[5] ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                    }`}
+                  >
                     <span className="absolute -left-3 top-6 w-6 h-6 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-full flex items-center justify-center">
                       <span className="w-2 h-2 bg-white rounded-full"></span>
                     </span>
@@ -182,13 +276,9 @@ const SectionPendidikan = () => {
                   </p>
                 </div>
               </div>
-
-              
             </div>
           </div>
         </div>
-
-        
       </div>
     </section>
   );

@@ -1,17 +1,80 @@
 import React, { useEffect, useRef } from "react";
-import { motion, useInView, useAnimation, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
+
+// Enhanced AnimatedElement component with scroll-based visibility (re-triggers on scroll)
+const AnimatedElement = ({ 
+  children, 
+  direction = "up", 
+  delay = 0, 
+  duration = 0.8, 
+  threshold = 0.1,
+  className = "",
+  ...props 
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: false, // Allow re-triggering when scrolling back
+    margin: "-10% 0px -10% 0px", // Better viewport detection
+    threshold 
+  });
+
+  const directions = {
+    up: { y: 60, x: 0, rotateX: 15 },
+    down: { y: -60, x: 0, rotateX: -15 },
+    left: { y: 0, x: 60, rotateY: 15 },
+    right: { y: 0, x: -60, rotateY: -15 },
+    scale: { y: 0, x: 0, scale: 0.8 },
+    blur: { y: 30, x: 0, scale: 0.9 }
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{
+        opacity: 0,
+        scale: 0.9,
+        filter: "blur(20px)",
+        ...directions[direction]
+      }}
+      animate={isInView ? {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        y: 0,
+        x: 0,
+        rotateX: 0,
+        rotateY: 0
+      } : {
+        opacity: 0,
+        scale: 0.9,
+        filter: "blur(20px)",
+        ...directions[direction]
+      }}
+      transition={{
+        duration,
+        delay,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        filter: { duration: duration * 0.6 },
+        scale: { type: "spring", stiffness: 100, damping: 20 }
+      }}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const SectionKedamaian = () => {
   const ref = useRef(null);
-  const controls = useAnimation();
-  const isInView = useInView(ref, { threshold: 0.2, once: true });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
   
-  // Parallax effects
+  // Enhanced parallax effects with spring
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const ySpring = useSpring(y, { stiffness: 100, damping: 30 });
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.8, 1, 1, 0.8]);
 
   // Inject elegant fonts
@@ -23,77 +86,12 @@ const SectionKedamaian = () => {
     document.head.appendChild(link);
   }, []);
 
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [controls, isInView]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 1.2,
-        staggerChildren: 0.3
-      }
-    }
-  };
-
-  const titleVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 60,
-      scale: 0.9
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 1.2,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
-
-  const decorationVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.8
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        delay: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
-
-  const quoteVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 30
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        delay: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
-
   return (
     <section
+      ref={ref}
       className="relative py-24 md:py-32 overflow-hidden"
       style={{ 
-        backgroundImage: "url('/prajnaImages/promo.jpg.jpeg')",
+        backgroundImage: "url('/prajnaImages/kedamaianbg.jpeg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -132,54 +130,55 @@ const SectionKedamaian = () => {
         transition={{ duration: 2, delay: 0.5 }}
       />
 
-      {/* Floating Elegant Elements */}
-      {[...Array(6)].map((_, i) => (
+      {/* Enhanced Floating Elements with better animations */}
+      {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full opacity-5"
+          className="absolute rounded-full"
           style={{
-            left: `${15 + i * 15}%`,
-            top: `${20 + (i % 3) * 25}%`,
-            width: `${8 + i * 2}px`,
-            height: `${8 + i * 2}px`,
+            left: `${10 + i * 12}%`,
+            top: `${15 + (i % 4) * 20}%`,
+            width: `${6 + (i % 3) * 3}px`,
+            height: `${6 + (i % 3) * 3}px`,
             background: i % 2 === 0 
-              ? "linear-gradient(45deg, #FFD700, #DAA520)" 
-              : "linear-gradient(45deg, #228B22, #32CD32)"
+              ? "radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%)" 
+              : "radial-gradient(circle, rgba(34, 139, 34, 0.15) 0%, transparent 70%)"
           }}
           animate={{
-            y: [0, -20, 0],
+            y: [0, -25 - i * 2, 0],
             rotate: [0, 360],
-            scale: [1, 1.2, 1],
+            scale: [1, 1.4, 1],
+            opacity: [0.3, 0.8, 0.3]
           }}
           transition={{
-            duration: 8 + i * 2,
+            duration: 8 + i * 1.5,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: i * 1.2
+            delay: i * 0.8
           }}
         />
       ))}
 
       <div className="relative container mx-auto px-2 md:px-4">
         <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
           className="max-w-6xl mx-auto"
-          style={{ y }}
+          style={{ y: ySpring }}
         >
-          {/* Top Decorative Element */}
-          <motion.div 
-            variants={decorationVariants}
+          {/* Top Decorative Element with re-triggering animation */}
+          <AnimatedElement 
+            direction="scale" 
+            delay={0.2} 
+            duration={0.8} 
+            threshold={0.3}
             className="flex justify-center mb-2"
           >
             <div className="flex items-center gap-4">
               <motion.div
                 className="w-12 h-0.5 bg-gradient-to-r from-transparent via-green-600 to-yellow-600"
                 initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1.5, delay: 1 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: false, amount: 0.8 }}
+                transition={{ duration: 1.5, delay: 0.5 }}
               />
               <motion.div
                 className="w-3 h-3 bg-gradient-to-r from-yellow-600 to-green-600 rounded-full"
@@ -196,15 +195,19 @@ const SectionKedamaian = () => {
               <motion.div
                 className="w-12 h-0.5 bg-gradient-to-l from-transparent via-yellow-600 to-green-600"
                 initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 1.5, delay: 1 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: false, amount: 0.8 }}
+                transition={{ duration: 1.5, delay: 0.5 }}
               />
             </div>
-          </motion.div>
+          </AnimatedElement>
 
-          {/* Main Quote */}
-          <motion.div 
-            variants={titleVariants}
+          {/* Main Quote with enhanced re-triggering animation */}
+          <AnimatedElement 
+            direction="blur" 
+            delay={0.4} 
+            duration={1.2} 
+            threshold={0.2}
             className="text-center mb-12"
           >
             <motion.h2
@@ -233,44 +236,124 @@ const SectionKedamaian = () => {
                 repeat: Infinity,
                 ease: "linear"
               }}
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.3 }
+              }}
             >
               Kedamaian dan Kebahagiaan yang sesungguhnya dan kekal selamanya
               bersumber dari Keharmonisan, yakni Keharmonisan hati nurani manusia,
               Keharmonisan hubungan antarmanusia, dan Keharmonisan manusia dengan
               alam semesta.
             </motion.h2>
-          </motion.div>
+          </AnimatedElement>
 
-          {/* Quote Attribution */}
-          <motion.div 
-            variants={quoteVariants}
+          {/* Quote Attribution with staggered animation */}
+          <AnimatedElement 
+            direction="up" 
+            delay={0.8} 
+            duration={1.0} 
+            threshold={0.3}
             className="flex justify-center"
           >
             <div className="flex flex-col items-center space-y-4">
-              
-
-              
+              {/* Optional attribution content can be added here */}
             </div>
-          </motion.div>
+          </AnimatedElement>
 
-          {/* Bottom Decorative Element */}
-          <motion.div 
+          {/* Enhanced Bottom Decorative Element */}
+          <AnimatedElement 
+            direction="scale" 
+            delay={1.0} 
+            duration={0.8} 
+            threshold={0.5}
             className="flex justify-center -mt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.5 }}
           >
             <motion.div 
-              className="w-20 h-1 bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 rounded-full"
+              className="relative group"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div 
+                className="w-20 h-1 bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 rounded-full"
+                animate={{
+                  scaleX: [1, 1.2, 1],
+                  opacity: [0.7, 1, 0.7]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              {/* Hover glow effect */}
+              <motion.div
+                className="absolute inset-0 w-20 h-1 bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 rounded-full blur-sm opacity-0 group-hover:opacity-50"
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>
+          </AnimatedElement>
+
+          {/* Additional floating quote marks for visual interest */}
+          <AnimatedElement 
+            direction="left" 
+            delay={1.2} 
+            duration={0.6} 
+            threshold={0.8}
+            className="absolute top-10 left-4 md:left-10"
+          >
+            <motion.div
+              className="text-6xl md:text-8xl font-serif text-green-200/30 select-none"
               animate={{
-                scaleX: [1, 1.2, 1],
-                opacity: [0.7, 1, 0.7]
+                rotate: [0, 5, -5, 0],
+                scale: [1, 1.1, 1]
               }}
               transition={{
-                duration: 3,
+                duration: 6,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
+            >
+              "
+            </motion.div>
+          </AnimatedElement>
+
+          <AnimatedElement 
+            direction="right" 
+            delay={1.4} 
+            duration={0.6} 
+            threshold={0.8}
+            className="absolute bottom-10 right-4 md:right-10"
+          >
+            <motion.div
+              className="text-6xl md:text-8xl font-serif text-yellow-200/30 select-none"
+              style={{ transform: "rotate(180deg)" }}
+              animate={{
+                rotate: [180, 185, 175, 180],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 3
+              }}
+            >
+              "
+            </motion.div>
+          </AnimatedElement>
+
+          {/* Reading progress indicator */}
+          <motion.div
+            className="fixed right-4 top-1/2 transform -translate-y-1/2 w-1 h-32 bg-gray-200/30 rounded-full z-50 hidden lg:block"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.6 }}
+            viewport={{ once: false }}
+          >
+            <motion.div
+              className="w-full bg-gradient-to-b from-green-500 to-yellow-500 rounded-full origin-top"
+              style={{ scaleY: scrollYProgress }}
             />
           </motion.div>
         </motion.div>

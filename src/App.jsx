@@ -1,6 +1,6 @@
 // App.js
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LanguageSelector from "./components/LanguageSelector";
 import HomeIndonesia from "./pages/HomeIndonesia";
 import HomeChinese from "./pages/HomeChinese";
@@ -24,13 +24,30 @@ import SeminarBudayaKetiga from "./pages/SeminarBudayaKetiga";
 import PertukaranSeniBudaya from "./pages/PertukaranSeniBudaya";
 import SeminarBudayaKedua from "./pages/SeminarBudayaKedua";
 
+// Import Loader
+import Loader from "./components/Loader";
 
 function App() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Loader pertama kali buka website
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500); // 1,5 detik
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLanguageSelect = (language) => {
-    setSelectedLanguage(language);
+    setLoading(true); // tampilkan loader saat pilih bahasa
+    setTimeout(() => {
+      setSelectedLanguage(language);
+      setLoading(false);
+    }, 1500); // loader jalan sebentar lalu masuk halaman
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <Router>
@@ -86,7 +103,6 @@ function App() {
         <Route path="/kegiatan/seminar-budaya-ketiga" element={<SeminarBudayaKetiga />} />
         <Route path="/kegiatan/pertukaran-seni-budaya" element={<PertukaranSeniBudaya />} />
         <Route path="/kegiatan/seminar-budaya-kedua" element={<SeminarBudayaKedua />} />
-
 
         {/* Catch-all redirect */}
         <Route path="*" element={<h1>Halaman tidak ditemukan</h1>} />

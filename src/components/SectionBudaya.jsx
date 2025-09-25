@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const SectionBudaya = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
 
   // inject font fancy
   useEffect(() => {
@@ -11,29 +14,45 @@ const SectionBudaya = () => {
     link.rel = "stylesheet";
     document.head.appendChild(link);
 
-    // Intersection Observer for animations
-    const observer = new IntersectionObserver(
+    // Enhanced Intersection Observer for header animations - always re-render
+    const headerObserver = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { 
+        threshold: [0.1, 0.2, 0.3],
+        rootMargin: "-10% 0px -10% 0px"
+      }
     );
 
-    const section = document.getElementById("budaya");
-    if (section) {
-      observer.observe(section);
+    // Enhanced Intersection Observer for content animations - always re-render
+    const contentObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsContentVisible(entry.isIntersecting);
+      },
+      { 
+        threshold: [0.2, 0.3, 0.4],
+        rootMargin: "-20% 0px -20% 0px"
+      }
+    );
+
+    if (sectionRef.current) {
+      headerObserver.observe(sectionRef.current);
+    }
+    if (contentRef.current) {
+      contentObserver.observe(contentRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      headerObserver.disconnect();
+      contentObserver.disconnect();
+    };
   }, []);
-
-
 
   return (
     <section
       id="budaya"
+      ref={sectionRef}
       className="relative min-h-screen bg-gradient-to-br from-slate-900 via-gray-800 to-slate-900 overflow-hidden"
     >
       {/* Background Image with Overlay */}
@@ -65,30 +84,32 @@ const SectionBudaya = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-6 py-20">
-        {/* Header Section */}
+        {/* Header Section with enhanced re-rendering animations */}
         <div className={`text-center mb-16 transform transition-all duration-1000 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}>
           
-
           {/* Main Title */}
           <h2
-  className="text-4xl md:text-5xl lg:text-6xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400 leading-tight"
-  style={{
-    fontFamily: "'Great Vibes', cursive",
-    lineHeight: "0.8",       // bikin ruang vertikal
-    paddingTop: "0.25em",    // ruang atas biar huruf tinggi gak kepotong
-    paddingBottom: "0.15em", // ruang bawah biar ekor huruf gak kepotong
-    filter: "drop-shadow(2px 2px 8px rgba(0,0,0,0.5))",
-  }}
->
-  Budaya Keharmonisan
-</h2>
-
+            className={`text-4xl md:text-5xl lg:text-6xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400 leading-tight transform transition-all duration-1200 delay-200 ${
+              isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'
+            }`}
+            style={{
+              fontFamily: "'Great Vibes', cursive",
+              lineHeight: "0.8",
+              paddingTop: "0.25em",
+              paddingBottom: "0.15em",
+              filter: "drop-shadow(2px 2px 8px rgba(0,0,0,0.5))",
+            }}
+          >
+            Budaya Keharmonisan
+          </h2>
 
           {/* Subtitle */}
           <h3
-            className="text-2xl md:text-3xl text-gray-200 mb-4"
+            className={`text-2xl md:text-3xl text-gray-200 mb-4 transform transition-all duration-1000 delay-400 ${
+              isVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+            }`}
             style={{
               fontFamily: "Playfair Display, serif",
               textShadow: "1px 1px 4px rgba(0,0,0,0.5)",
@@ -98,27 +119,37 @@ const SectionBudaya = () => {
           </h3>
 
           {/* Decorative Divider */}
-          <div className="w-32 h-1 bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400 mx-auto rounded-full"></div>
+          <div className={`w-32 h-1 bg-gradient-to-r from-yellow-400 via-amber-300 to-green-400 mx-auto rounded-full transform transition-all duration-800 delay-600 ${
+            isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
+          }`}></div>
         </div>
 
-        {/* Main Article Content */}
-        <div className="max-w-5xl mx-auto">
-          <div className={`transform transition-all duration-1000 delay-500 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+        {/* Main Article Content with enhanced re-rendering animations */}
+        <div className="max-w-5xl mx-auto" ref={contentRef}>
+          <div className={`transform transition-all duration-1000 ${
+            isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             {/* Article Container */}
-            <div className="bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+            <div className={`bg-white/10 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl transform transition-all duration-1200 delay-200 ${
+              isContentVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-98'
+            }`}>
               {/* Article Content */}
               <div className="prose prose-lg max-w-none">
-                <div className="space-y-8 text-gray-200 leading-relaxed text-lg" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <p>
+                <div className={`space-y-8 text-gray-200 leading-relaxed text-lg transform transition-all duration-1000 delay-400 ${
+                  isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+                }`} style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <p className={`transform transition-all duration-800 delay-500 ${
+                    isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}>
                     Kita semua mengetahui pentingnya keharmonisan. Energi dan aliran
                     darah yang harmonis menjadikan tubuh kita sehat; keluarga yang
                     harmonis mendatangkan kebahagiaan; masyarakat dan negara yang
                     harmonis merupakan sumber kemajuan dan kesejahteraan.
                   </p>
                   
-                  <p>
+                  <p className={`transform transition-all duration-800 delay-600 ${
+                    isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}>
                     Pada era ini, manusia menghadapi berbagai tantangan terbesar
                     sepanjang sejarah, perubahan iklim secara drastis, kelesuan ekonomi
                     berkepanjangan, meledaknya populasi manusia, kelangkaan sumber daya,
@@ -127,7 +158,9 @@ const SectionBudaya = () => {
                     merupakan dasar solusinya.
                   </p>
                   
-                  <p>
+                  <p className={`transform transition-all duration-800 delay-700 ${
+                    isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}>
                     Keharmonisan berasal dari pemahaman sejati atas etika dan moralitas.
                     Negara Kesatuan Republik Indonesia adalah negara yang kaya akan
                     keragaman suku, agama dan budaya. Kebijaksanaan nenek moyang Bangsa
@@ -136,7 +169,9 @@ const SectionBudaya = () => {
                     telah mempersatukan bangsa Indonesia.
                   </p>
                   
-                  <p>
+                  <p className={`transform transition-all duration-800 delay-800 ${
+                    isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}>
                     Ajaran Konfusianisme dari budaya Tionghoa juga memiliki pepatah:
                     <span className="text-amber-300 font-semibold italic"> "Keharmonisan di dalam Perbedaan"</span>. Sebuah pepatah ajaran Taoisme di
                     dalam kitab suci Tao Te Ching menyebutkan: <span className="text-green-300 font-semibold italic">"Manusia hendaknya
@@ -151,14 +186,18 @@ const SectionBudaya = () => {
                     dan berkesinambungan.
                   </p>
                   
-                  <p>
+                  <p className={`transform transition-all duration-800 delay-900 ${
+                    isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}>
                     Saat ini adalah momen penting. Manusia semakin saling berhubungan
                     satu sama lain dan semua orang memiliki tanggung jawab untuk
                     bersama-sama memahami dan merealisasikan keharmonisan secara utuh
                     dan nyata.
                   </p>
                   
-                  <p className="text-xl leading-relaxed">
+                  <p className={`text-xl leading-relaxed transform transition-all duration-800 delay-1000 ${
+                    isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}>
                     Asalkan kita semua memiliki kepedulian terhadap keharmonisan, maka
                     masa depan dunia yang cemerlang akan penuh dengan harapan. Semoga
                     upaya <span className="text-yellow-300 font-bold">Yayasan Prajna Harmonis</span> dapat turut mendorong terciptanya
@@ -169,7 +208,9 @@ const SectionBudaya = () => {
               </div>
 
               {/* Decorative Quote Accent */}
-              <div className="mt-12 pt-8 border-t border-white/20">
+              <div className={`mt-12 pt-8 border-t border-white/20 transform transition-all duration-1000 delay-1200 ${
+                isContentVisible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
+              }`}>
                 <div className="flex items-center justify-center">
                   <div className="flex items-center space-x-4">
                     <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
@@ -185,8 +226,6 @@ const SectionBudaya = () => {
             </div>
           </div>
         </div>
-
-
       </div>
     </section>
   );
