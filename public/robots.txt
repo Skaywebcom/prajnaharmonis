@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prajnaharmonis.vercel.app/sitemap.xml
