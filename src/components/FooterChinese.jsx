@@ -18,7 +18,7 @@ const FooterChinese = () => {
           <p className="text-sm text-green-100">
             © 2016-{new Date().getFullYear()}{" "}
             <span className="font-semibold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
-              Prajna Harmonis 基金会
+              和谐文化基金会
             </span>
             。版权所有。
           </p>
