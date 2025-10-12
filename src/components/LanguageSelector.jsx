@@ -78,21 +78,21 @@ const LanguageSelector = ({ onSelect }) => {
           transition={{ duration: 1, delay: 0.5 }}
         />
         <motion.p
-          className="text-4xl md:text-5xl font-bold mb-10"
-          style={{
-  fontFamily: "'Great Vibes', cursive",
-  color: "#7CFC00",       // hijau muda cerah
-  fontWeight: "900",      // maksimal di CSS
-  WebkitTextStroke: "0.1px black",  // tipis tapi cukup kontras
-  textShadow: "2px 2px 4px rgba(0,0,0,0.7)",
-}}
+  className="text-4xl md:text-5xl font-bold mb-10"
+  style={{
+    fontFamily: "'Great Vibes', cursive",
+    color: "#FFD700", // gold
+    fontWeight: "900",
+    
+    letterSpacing: "1px", // make it slightly wider
+  }}
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1, delay: 1 }}
+>
+  Hakikat Keharmonisan ~ Budaya Keharmonisan ~ Dunia Harmonis
+</motion.p>
 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          Hakikat Keharmonisan  Budaya Keharmonisan  Dunia Harmonis
-        </motion.p>
 
         {/* Language Buttons Container */}
         <motion.div
