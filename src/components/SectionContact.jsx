@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { MapPin, Phone, Smartphone, Mail, Send, Building2, Clock } from "lucide-react";
 
-// AnimatedElement tetap sama
+// Komponen animasi tetap sama
 const AnimatedElement = ({ children, direction = "up", delay = 0, duration = 0.8, threshold = 0.1 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-10% 0px -10% 0px", threshold });
@@ -37,7 +37,7 @@ const AnimatedElement = ({ children, direction = "up", delay = 0, duration = 0.8
   );
 };
 
-const SectionContactChinese = () => {
+const SectionContact = () => {
   const [formData, setFormData] = useState({
     nama: "",
     email: "",
@@ -53,22 +53,22 @@ const SectionContactChinese = () => {
 
   const handleSubmit = () => {
     if (!isFormComplete) {
-      alert("请先填写完整表单。");
+      alert("Harap isi semua kolom sebelum mengirim pesan.");
       return;
     }
 
-    const waMessage = `你好，我是 ${formData.nama} (${formData.email})，想要留言：\n\n${formData.pesan}`;
+    const waMessage = `Halo, saya ${formData.nama} (${formData.email}) ingin menyampaikan pesan:\n\n${formData.pesan}`;
     const waUrl = `https://wa.me/6285271226353?text=${encodeURIComponent(waMessage)}`;
     window.open(waUrl, "_blank");
   };
 
   return (
     <section
-      id="联系"
+      id="kontak"
       className="min-h-screen bg-cover bg-center py-20 px-6 relative overflow-hidden"
       style={{ backgroundImage: "url('/prajnaImages/background/18.png')" }}
     >
-      {/* 背景装饰 */}
+      {/* Dekorasi Latar */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
         <div className="absolute top-32 right-20 w-64 h-64 bg-yellow-200/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-32 left-20 w-80 h-80 bg-green-200/20 rounded-full blur-3xl"></div>
@@ -76,7 +76,7 @@ const SectionContactChinese = () => {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* 标题 */}
+        {/* Judul */}
         <AnimatedElement direction="down" delay={0.2} duration={1.2}>
           <div className="text-center mb-16">
             <div className="inline-flex items-center justify-center mb-6">
@@ -94,27 +94,27 @@ const SectionContactChinese = () => {
                 textShadow: "2px 2px 6px rgba(0,0,0,0.6)"
               }}
             >
-              联系我们
+              Hubungi Kami
             </h2>
 
             <p className="text-xl md:text-2xl text-gray-900 font-semibold max-w-3xl mx-auto leading-relaxed">
-              我们随时为您提供优质的教育咨询服务，欢迎随时联系专业团队
+              Kami siap membantu Anda dengan layanan konsultasi pendidikan terbaik. Silakan hubungi tim profesional kami kapan saja.
             </p>
           </div>
         </AnimatedElement>
 
-        {/* 内容区域 */}
+        {/* Konten Utama */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 -mt-8 relative z-10">
-          {/* 联系信息 */}
+          {/* Informasi Kontak */}
           <div className="space-y-8">
-            {/* 办公室 */}
+            {/* Kantor */}
             <AnimatedElement direction="left" delay={0.4} duration={0.8}>
               <div className="bg-white/90 backdrop-blur-sm shadow-2xl rounded-3xl p-8 border border-gray-100/50">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mr-4">
                     <Building2 className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800">总部办公室</h3>
+                  <h3 className="text-2xl font-bold text-gray-800">Kantor Pusat</h3>
                 </div>
 
                 <div className="space-y-4">
@@ -125,8 +125,8 @@ const SectionContactChinese = () => {
                     <div>
                       <p className="text-gray-800 leading-relaxed">
                         Ruko Raffles City<br />
-                        D座 2A-5号, Batam Center,<br />
-                        Batam 29432, 印尼
+                        Blok D No. 2A-5, Batam Center,<br />
+                        Batam 29432, Indonesia
                       </p>
                     </div>
                   </div>
@@ -155,85 +155,85 @@ const SectionContactChinese = () => {
               </div>
             </AnimatedElement>
 
-            {/* 营业时间 */}
+            {/* Jam Operasional */}
             <AnimatedElement direction="left" delay={0.6} duration={0.8}>
               <div className="bg-gradient-to-br from-yellow-50 to-green-50 shadow-xl rounded-3xl p-8 border border-yellow-200/50">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mr-4">
                     <Clock className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800">营业时间</h3>
+                  <h3 className="text-2xl font-bold text-gray-800">Jam Operasional</h3>
                 </div>
 
                 <div className="space-y-3">
                   <div className="flex justify-between items-center py-2 border-b border-yellow-200/50">
-                    <span className="text-gray-700 font-medium">周一 - 周五</span>
+                    <span className="text-gray-700 font-medium">Senin - Jumat</span>
                     <span className="text-gray-800 font-semibold">08:00 - 17:00 WIB</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-yellow-200/50">
-                    <span className="text-gray-700 font-medium">周六</span>
+                    <span className="text-gray-700 font-medium">Sabtu</span>
                     <span className="text-gray-800 font-semibold">08:00 - 15:00 WIB</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-700 font-medium">周日</span>
-                    <span className="text-red-600 font-semibold">休息</span>
+                    <span className="text-gray-700 font-medium">Minggu</span>
+                    <span className="text-red-600 font-semibold">Tutup</span>
                   </div>
                 </div>
               </div>
             </AnimatedElement>
           </div>
 
-          {/* 联系表单 */}
+          {/* Formulir Kontak */}
           <AnimatedElement direction="right" delay={0.4} duration={0.8}>
             <div className="bg-white/90 backdrop-blur-sm shadow-2xl rounded-3xl p-8 border border-gray-100/50">
               <div className="mb-8">
-                <h3 className="text-3xl font-bold text-gray-800 mb-4">发送留言</h3>
+                <h3 className="text-3xl font-bold text-gray-800 mb-4">Kirim Pesan</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  请留下您的信息，我们会在24小时内回复
+                  Silakan tinggalkan pesan Anda, kami akan membalas dalam 24 jam.
                 </p>
               </div>
 
               <div className="space-y-6">
-                {/* 姓名 */}
+                {/* Nama */}
                 <div className="group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">姓名</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">Nama</label>
                   <input
                     type="text"
                     name="nama"
                     value={formData.nama}
                     onChange={handleInputChange}
                     className="w-full border-2 border-gray-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 text-gray-800 placeholder-gray-400"
-                    placeholder="请输入您的姓名"
+                    placeholder="Masukkan nama Anda"
                   />
                 </div>
 
-                {/* 邮箱 */}
+                {/* Email */}
                 <div className="group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">电子邮箱</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">Email</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     className="w-full border-2 border-gray-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-yellow-500 focus:ring-4 focus:ring-yellow-100 transition-all duration-300 text-gray-800 placeholder-gray-400"
-                    placeholder="您的邮箱"
+                    placeholder="Masukkan email Anda"
                   />
                 </div>
 
-                {/* 留言 */}
+                {/* Pesan */}
                 <div className="group">
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">留言内容</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">Pesan</label>
                   <textarea
                     name="pesan"
                     value={formData.pesan}
                     onChange={handleInputChange}
                     rows="5"
                     className="w-full border-2 border-gray-200 rounded-2xl px-6 py-4 focus:outline-none focus:border-green-500 focus:ring-4 focus:ring-green-100 transition-all duration-300 text-gray-800 placeholder-gray-400 resize-none"
-                    placeholder="请在这里写下您的问题或留言..."
+                    placeholder="Tulis pesan atau pertanyaan Anda di sini..."
                   ></textarea>
                 </div>
 
-                {/* 提交按钮 */}
+                {/* Tombol Submit */}
                 <button
                   onClick={handleSubmit}
                   disabled={!isFormComplete}
@@ -244,26 +244,26 @@ const SectionContactChinese = () => {
                   }`}
                 >
                   <Send className="w-5 h-5" />
-                  发送
+                  Kirim
                 </button>
               </div>
             </div>
           </AnimatedElement>
         </div>
 
-        {/* 底部 CTA */}
+        {/* CTA Bawah */}
         <AnimatedElement direction="up" delay={0.8} duration={1.0}>
           <div className="mt-16 text-center relative z-10">
             <div className="inline-block bg-white/80 backdrop-blur-sm shadow-lg rounded-2xl px-8 py-6 border border-gray-100/50">
               <p className="text-gray-700 text-lg">
-                需要直接咨询？
+                Butuh konsultasi langsung?
                 <a
                   href="https://wa.me/6285271226353"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-2 font-bold text-green-700 hover:underline"
                 >
-                  立即联系我们！
+                  Hubungi kami sekarang!
                 </a>
               </p>
             </div>
@@ -274,4 +274,4 @@ const SectionContactChinese = () => {
   );
 };
 
-export default SectionContactChinese;
+export default SectionContact;
