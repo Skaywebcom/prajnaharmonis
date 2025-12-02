@@ -13,10 +13,10 @@ const Navbar = () => {
 
   const links = [
     { id: "beranda", label: "首页" },
-    { id: "tentang", label: "关于我们" },
-    { id: "budaya", label: "和谐文化" },
-    { id: "pendidikan", label: "道德教育" },
-    { id: "kegiatan", label: "活动" },
+    { id: "tentang", label: "认识我们" },
+    { id: "budaya", label: "文明交流" },
+    { id: "pendidikan", label: "文化活动" },
+    { id: "kegiatan", label: "教育活动" },
     { id: "hubungi", label: "联系我们" },
   ];
 

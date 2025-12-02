@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-const SectionPendidikanChinese = () => {
+const SectionPendidikanChinese1 = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [paragraphsVisible, setParagraphsVisible] = useState([]);
@@ -64,6 +64,7 @@ const SectionPendidikanChinese = () => {
   const paragraphColors = [
     "from-yellow-500/20 to-amber-500/10 border-yellow-400/40",
     "from-emerald-500/20 to-green-500/10 border-emerald-400/40",
+    "from-teal-500/20 to-cyan-500/10 border-teal-400/40",
     "from-blue-500/20 to-indigo-500/10 border-blue-400/40"
   ];
 
@@ -104,7 +105,7 @@ const SectionPendidikanChinese = () => {
         <svg width="100" height="100" className="absolute inset-0 w-full h-full">
           <defs>
             <pattern
-              id="education-pattern"
+              id="education-pattern-1"
               x="0"
               y="0"
               width="100"
@@ -117,7 +118,7 @@ const SectionPendidikanChinese = () => {
               <path d="M50 30 L60 40 L50 50 L40 40 Z" fill="#f59e0b" opacity="0.3" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#education-pattern)" />
+          <rect width="100%" height="100%" fill="url(#education-pattern-1)" />
         </svg>
       </div>
 
@@ -153,9 +154,9 @@ const SectionPendidikanChinese = () => {
               lineHeight: "1.3"
             }}
           >
-            情系华文，聚首巴淡：
+            印尼和谐文化协会携手暨南大学
             <br className="hidden sm:block" />
-            <span className="block sm:inline">为印尼华文教育设立函授教学点</span>
+            <span className="block sm:inline">推动北干巴鲁华文师资建设</span>
           </h2>
 
           {/* Enhanced divider */}
@@ -221,7 +222,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[0]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-yellow-400/50 backdrop-blur-sm">
-                      印尼和谐文化协会成立之初、印尼华文教育仍普遍面临发展缓慢、师资薄弱与资源匮乏等挑战。2010年、在暨南大学华文学院印尼万隆教学点负责人陈清章前辈的引荐下、本会于巴淡市设立了暨南大学华文学院在印尼廖内省及廖内群岛省的首个华文教育专业本科函授教学点、成为该校在印尼设立的第十个函授教学点。
+                      2012年2月6日、位于印尼廖内省北干巴鲁市隆重举行暨南大学华文学院华文教育专业本科远程教育开学仪式。暨南大学华文学院教授王衍军、印尼和谐文化协会发起人陈朝明、会长黄愿字、廖内省印华百家姓协会主席方田益、北干巴鲁华联会主席林高伟以及多位当地华社领导、华文教育人士出席开学仪式。
                     </p>
                   </div>
 
@@ -236,7 +237,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[1]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-emerald-400/50 backdrop-blur-sm">
-                      同年、本会成功举办首期面授课程、由暨南大学华文学院海外教学部主任张礼博士和邵长超老师授课。首期面授课程共开设《现代汉语词汇》《现代汉语语音》《初级汉语》《中国概况》四门科目、采用为期一周、每日上下午授课的集中教学方式。参加首期面授的近30名学员、多为来自巴淡市及周边城市的中小学教师。能够直接接受来自中国专业教师的课堂指导、学员们倍感兴奋、纷纷表示收获良多。
+                      王衍军教授介绍了华文教育远程学历教育的发展背景、教学模式与前景。陈朝明先生在致辞中鼓励当地教育界人士共同努力、扩大远程华文教育的覆盖范围、培养更多华文教育专业人才、同时呼吁大家加强对中华优秀传统文化的学习。当地华社领导、华文教育人士对该项目表示高度欢迎。
                     </p>
                   </div>
 
@@ -250,8 +251,23 @@ const SectionPendidikanChinese = () => {
                     }`}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[2]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
+                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-teal-400/50 backdrop-blur-sm">
+                      印尼和谐文化协会秉持"发展华文教育、弘扬中华文化、提升师资水平、培养教育人才"的宗旨、高度关注廖内省省会北干巴鲁市在华文师资方面的需求。经过充分沟通与周密筹备、本协会携手暨南大学华文学院成功在北干巴鲁开设华文教育专业本科远程教育项目、首期即招收30余名当地华文教师、顺利设立当地函授教学点。
+                    </p>
+                  </div>
+
+                  {/* Paragraph 4 */}
+                  <div
+                    ref={(el) => setParagraphRef(el, 3)}
+                    className={`group relative transform transition-all duration-800 delay-1100 ${
+                      paragraphsVisible[3]
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-6 opacity-0"
+                    }`}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[3]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-blue-400/50 backdrop-blur-sm">
-                      在开学典礼上、张礼博士系统介绍了暨南大学在印尼设立华文教育专业教学点的总体情况。他指出、暨南大学创办于1906年、是由中国国务院侨务办公室与教育部领导的综合性大学、并入选国家面向21世纪重点建设的百所高校之一。华文教育专业致力于面向海外培养华文师资及教育教学管理人才、招生对象包括在职华文教师及有志投身华文教育事业的各界人士。学员顺利完成学业者可获得暨南大学本科毕业证书、符合相关规定者还可获得教育学学士学位。
+                      首次在北干巴鲁开设的面授课程共设四门科目：《中国民俗》《现代汉语词汇》《中文信息处理》《华文现代教育技术》、由暨南大学华文学院王衍军教授和张彦军老师担任授课。能够直接向来自中国的专家学习、学员们倍感荣幸、课堂上学习态度认真、互动积极、氛围热烈。
                     </p>
                   </div>
                 </div>
@@ -275,4 +291,4 @@ const SectionPendidikanChinese = () => {
   );
 };
 
-export default SectionPendidikanChinese;
+export default SectionPendidikanChinese1;

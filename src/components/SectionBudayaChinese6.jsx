@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-const SectionPendidikanChinese = () => {
+const SectionBudayaChinese6 = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [paragraphsVisible, setParagraphsVisible] = useState([]);
@@ -64,7 +64,8 @@ const SectionPendidikanChinese = () => {
   const paragraphColors = [
     "from-yellow-500/20 to-amber-500/10 border-yellow-400/40",
     "from-emerald-500/20 to-green-500/10 border-emerald-400/40",
-    "from-blue-500/20 to-indigo-500/10 border-blue-400/40"
+    "from-amber-500/20 to-orange-500/10 border-amber-400/40",
+    "from-teal-500/20 to-cyan-500/10 border-teal-400/40"
   ];
 
   return (
@@ -77,7 +78,7 @@ const SectionPendidikanChinese = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15 transition-opacity duration-700"
         style={{ 
-          backgroundImage: "url('/prajnaImages/pendidikan.png')",
+          backgroundImage: "url('/prajnaImages/budaya17.jpg')",
           transform: "scale(1.1)"
         }}
       />
@@ -104,7 +105,7 @@ const SectionPendidikanChinese = () => {
         <svg width="100" height="100" className="absolute inset-0 w-full h-full">
           <defs>
             <pattern
-              id="education-pattern"
+              id="lecture-pattern"
               x="0"
               y="0"
               width="100"
@@ -117,7 +118,7 @@ const SectionPendidikanChinese = () => {
               <path d="M50 30 L60 40 L50 50 L40 40 Z" fill="#f59e0b" opacity="0.3" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#education-pattern)" />
+          <rect width="100%" height="100%" fill="url(#lecture-pattern)" />
         </svg>
       </div>
 
@@ -153,9 +154,9 @@ const SectionPendidikanChinese = () => {
               lineHeight: "1.3"
             }}
           >
-            情系华文，聚首巴淡：
+            疫情期间，印尼和谐文化协会
             <br className="hidden sm:block" />
-            <span className="block sm:inline">为印尼华文教育设立函授教学点</span>
+            <span className="block sm:inline">举办线上和谐文化讲座</span>
           </h2>
 
           {/* Enhanced divider */}
@@ -221,7 +222,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[0]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-yellow-400/50 backdrop-blur-sm">
-                      印尼和谐文化协会成立之初、印尼华文教育仍普遍面临发展缓慢、师资薄弱与资源匮乏等挑战。2010年、在暨南大学华文学院印尼万隆教学点负责人陈清章前辈的引荐下、本会于巴淡市设立了暨南大学华文学院在印尼廖内省及廖内群岛省的首个华文教育专业本科函授教学点、成为该校在印尼设立的第十个函授教学点。
+                      2022年5月21日、印尼和谐文化协会与慈永佛教大学联合举办以"共同促进文明和谐"为主题的线上和谐文化讲座。印尼各所高校的老师与学生、社会贤达、社会人士积极参加、共同探讨文明交流与和谐发展的重要议题。
                     </p>
                   </div>
 
@@ -236,7 +237,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[1]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-emerald-400/50 backdrop-blur-sm">
-                      同年、本会成功举办首期面授课程、由暨南大学华文学院海外教学部主任张礼博士和邵长超老师授课。首期面授课程共开设《现代汉语词汇》《现代汉语语音》《初级汉语》《中国概况》四门科目、采用为期一周、每日上下午授课的集中教学方式。参加首期面授的近30名学员、多为来自巴淡市及周边城市的中小学教师。能够直接接受来自中国专业教师的课堂指导、学员们倍感兴奋、纷纷表示收获良多。
+                      本次讲座邀请到中国人民大学哲学院教授、山东省泰山学者温海明发表主题演讲《西方对中国禅的误读及其对文明互鉴的启示——建构现代化意义的中国禅》。温教授深入分析部分西方学界对中国禅的误读、其形成的历史脉络、以及背后研究方法与范式错置所导致的偏差、为文明互鉴提供了重要启示。
                     </p>
                   </div>
 
@@ -250,8 +251,23 @@ const SectionPendidikanChinese = () => {
                     }`}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[2]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
-                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-blue-400/50 backdrop-blur-sm">
-                      在开学典礼上、张礼博士系统介绍了暨南大学在印尼设立华文教育专业教学点的总体情况。他指出、暨南大学创办于1906年、是由中国国务院侨务办公室与教育部领导的综合性大学、并入选国家面向21世纪重点建设的百所高校之一。华文教育专业致力于面向海外培养华文师资及教育教学管理人才、招生对象包括在职华文教师及有志投身华文教育事业的各界人士。学员顺利完成学业者可获得暨南大学本科毕业证书、符合相关规定者还可获得教育学学士学位。
+                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-amber-400/50 backdrop-blur-sm">
+                      印尼和谐文化协会（大道文化研究院）会长黄愿字在主旨演讲中指出、人类历史发展过程中、各国与各民族创造了多姿多彩的文化形态、形成了丰富多元的文明体系。这些文明成果不仅是推动文明交流、文明对话与文明互鉴的宝贵资源、也是构建"大道之行、和谐世界"的重要基础。
+                    </p>
+                  </div>
+
+                  {/* Paragraph 4 */}
+                  <div
+                    ref={(el) => setParagraphRef(el, 3)}
+                    className={`group relative transform transition-all duration-800 delay-1100 ${
+                      paragraphsVisible[3]
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-6 opacity-0"
+                    }`}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[3]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
+                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-teal-400/50 backdrop-blur-sm">
+                      慈永佛教大学教务委员会会长张胜佳在讲座中作"佛教与其当代价值"专题演讲、探讨佛教"平等观"对于当今人类社会日益突出的不平等现象所具有的启示与借鉴意义。
                     </p>
                   </div>
                 </div>
@@ -275,4 +291,4 @@ const SectionPendidikanChinese = () => {
   );
 };
 
-export default SectionPendidikanChinese;
+export default SectionBudayaChinese6;

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-const SectionPendidikanChinese = () => {
+const SectionBudayaChinese5 = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [paragraphsVisible, setParagraphsVisible] = useState([]);
@@ -64,7 +64,9 @@ const SectionPendidikanChinese = () => {
   const paragraphColors = [
     "from-yellow-500/20 to-amber-500/10 border-yellow-400/40",
     "from-emerald-500/20 to-green-500/10 border-emerald-400/40",
-    "from-blue-500/20 to-indigo-500/10 border-blue-400/40"
+    "from-amber-500/20 to-orange-500/10 border-amber-400/40",
+    "from-teal-500/20 to-cyan-500/10 border-teal-400/40",
+    "from-yellow-400/20 to-lime-500/10 border-yellow-300/40"
   ];
 
   return (
@@ -73,11 +75,11 @@ const SectionPendidikanChinese = () => {
       ref={sectionRef}
       className="relative min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800 overflow-hidden"
     >
-      {/* Enhanced Background Image */}
+      {/* Enhanced Background Image with Parallax Effect */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15 transition-opacity duration-700"
         style={{ 
-          backgroundImage: "url('/prajnaImages/pendidikan.png')",
+          backgroundImage: "url('/prajnaImages/budaya16.jpg')",
           transform: "scale(1.1)"
         }}
       />
@@ -153,9 +155,9 @@ const SectionPendidikanChinese = () => {
               lineHeight: "1.3"
             }}
           >
-            情系华文，聚首巴淡：
+            巴厘岛国际青少年艺术节盛大举行：
             <br className="hidden sm:block" />
-            <span className="block sm:inline">为印尼华文教育设立函授教学点</span>
+            <span className="block sm:inline">中印尼青年以艺术传递和谐之美</span>
           </h2>
 
           {/* Enhanced divider */}
@@ -221,7 +223,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[0]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-yellow-400/50 backdrop-blur-sm">
-                      印尼和谐文化协会成立之初、印尼华文教育仍普遍面临发展缓慢、师资薄弱与资源匮乏等挑战。2010年、在暨南大学华文学院印尼万隆教学点负责人陈清章前辈的引荐下、本会于巴淡市设立了暨南大学华文学院在印尼廖内省及廖内群岛省的首个华文教育专业本科函授教学点、成为该校在印尼设立的第十个函授教学点。
+                      2018年8月4日至5日、国际青少年艺术节在印尼巴厘岛 Dwijendra 学校隆重举行。本届艺术节由印尼和谐文化协会、印尼中国友好协会巴厘省分会、中华全国总工会——中国职工电化教育中心与北京师范大学启功书院主办；北京新华育英书画艺术交流中心与暨南大学印尼巴厘岛校友会承办。
                     </p>
                   </div>
 
@@ -236,7 +238,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[1]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-emerald-400/50 backdrop-blur-sm">
-                      同年、本会成功举办首期面授课程、由暨南大学华文学院海外教学部主任张礼博士和邵长超老师授课。首期面授课程共开设《现代汉语词汇》《现代汉语语音》《初级汉语》《中国概况》四门科目、采用为期一周、每日上下午授课的集中教学方式。参加首期面授的近30名学员、多为来自巴淡市及周边城市的中小学教师。能够直接接受来自中国专业教师的课堂指导、学员们倍感兴奋、纷纷表示收获良多。
+                      此次巴厘岛国际青少年艺术节意义深、远。中国驻登巴萨副总领事张晓丽、印度驻登巴萨总领事 Shri R.O. Sunil Babu、巴厘省文化局局长、巴厘省教育青年体育局局长、印尼和谐文化协会会长及理事、印尼中国友好协会巴厘省分会主席及理事、巴厘省百家姓主席、Dwijendra 基金会各级负责人、巴厘岛多位专业艺术家、大学教授、学校老师以及近50名中国学生与200余名巴厘岛学生共同出席了本次盛会。
                     </p>
                   </div>
 
@@ -250,8 +252,38 @@ const SectionPendidikanChinese = () => {
                     }`}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[2]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
-                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-blue-400/50 backdrop-blur-sm">
-                      在开学典礼上、张礼博士系统介绍了暨南大学在印尼设立华文教育专业教学点的总体情况。他指出、暨南大学创办于1906年、是由中国国务院侨务办公室与教育部领导的综合性大学、并入选国家面向21世纪重点建设的百所高校之一。华文教育专业致力于面向海外培养华文师资及教育教学管理人才、招生对象包括在职华文教师及有志投身华文教育事业的各界人士。学员顺利完成学业者可获得暨南大学本科毕业证书、符合相关规定者还可获得教育学学士学位。
+                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-amber-400/50 backdrop-blur-sm">
+                      印尼和谐文化协会会长黄愿字在致辞中表示、印尼、中国与印度同属亚洲文明古国、历史悠久、文化灿烂、均为推动世界和谐的重要力量。三国人口总量约占全球一半、而巴厘岛自古秉持"与神和谐、与人和谐、与自然和谐"的"三和谐"哲学理念、使其成为享誉世界的文化圣地、深受国际游客喜爱。
+                    </p>
+                  </div>
+
+                  {/* Paragraph 4 */}
+                  <div
+                    ref={(el) => setParagraphRef(el, 3)}
+                    className={`group relative transform transition-all duration-800 delay-1100 ${
+                      paragraphsVisible[3]
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-6 opacity-0"
+                    }`}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[3]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
+                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-teal-400/50 backdrop-blur-sm">
+                      本届艺术节内容丰富、精彩纷呈。8月4日上午的开幕式由巴厘岛学生呈献迎宾舞与瑜伽表演拉开序幕、随后巴厘岛国际热爱大自然促进会、著名笛子演奏家 Gus Teja、专业舞蹈团Pancer Langiit、以及中印尼学生的才艺展示、共同营造出美妙动人、和谐友善的开场氛围。
+                    </p>
+                  </div>
+
+                  {/* Paragraph 5 */}
+                  <div
+                    ref={(el) => setParagraphRef(el, 4)}
+                    className={`group relative transform transition-all duration-800 delay-1300 ${
+                      paragraphsVisible[4]
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-6 opacity-0"
+                    }`}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[4]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
+                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-yellow-300/50 backdrop-blur-sm">
+                      在交流活动中、中印尼学生通过书法、绘画、巴厘岛刻字艺术、编织艺术、舞蹈与乐器表演等多种形式热情互动、学习与笑声交织、现场其乐融融。中国学生还特别前往富有历史文化特色的小婆罗浮屠塔（巴加山迪纪念碑）进行写生、由巴厘岛专业艺术家指导。
                     </p>
                   </div>
                 </div>
@@ -275,4 +307,4 @@ const SectionPendidikanChinese = () => {
   );
 };
 
-export default SectionPendidikanChinese;
+export default SectionBudayaChinese5;

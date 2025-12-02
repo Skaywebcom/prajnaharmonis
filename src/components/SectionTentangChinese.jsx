@@ -136,10 +136,9 @@ const SectionTentang = () => {
   const y3Spring = useSpring(y3, { stiffness: 100, damping: 30 });
 
   const paragraphs = [
-    "印度尼西亚是世界上民族最多的国家，因此孕育了丰富多彩、和谐美丽的艺术与文化。从苏门答腊的沙邦到巴布亚的美鲁克群岛，大自然的壮丽景色，加上先贤的智慧，孕育了“多元一体”的格言和以五项原则为国家根基的护盾，使印尼人民在共和国的民族精神中紧密团结，和睦相处。",
-    "在当今世界各地人类冲突不断、社会动荡的背景下，和平与安宁的社会生活变得越来越稀有，更需要我们共同维护。般若和谐基金会期盼人类社会能够获得真正的和谐、和平与长久的幸福，不仅为了印尼人民，更是为了全人类。",
-    "人类生活的多样性是上天赐予的恩典。蓝天、白云、青山、大海、森林、河流、阳光、清风、空气与清澈的水，共同构成了丰富而美丽的生命世界。形态各异、色彩斑斓的植物带来视觉的美感，也提供了人类所需的营养。同样，不同的民族与族群孕育出丰富的艺术与文化，彼此交流、相互欣赏。所有的多样性都是祂的创造，赐予人类一个充实、幸福、充满意义的生活。",
-    "般若和谐基金会于2010年在印尼廖内群岛省巴淡岛成立、旨在促进文化交流、理解与研究、推动社会、民族与国家的和谐共处与和平发展。"
+    "印尼和谐文化协会于2010年在印尼廖内群岛省巴淡市成立、宗旨在于探讨和谐之道、弘扬和谐文化、致力于促进不同文化与文明的交流互鉴、为构建和谐世界、实现天下一家贡献力量。",
+    "成立以来、协会积极开展华文教育、道德教育、文化交流、文明对话以及中医大自然养生疗法等多项公益性社会服务工作、并在持续推进中取得了良好成效。",
+    "协会的主要干部由当地来自各行各业的青年志愿者组成。大家秉持对“和谐”理念的坚定信念、同心协力、无私奉献、为推动人类文明的和谐与进步不懈努力。",
   ];
 
   return (
@@ -260,7 +259,7 @@ const SectionTentang = () => {
                   ease: "linear"
                 }}
               >
-                关于我们
+                协会简介
                 
                 {/* Glow effect */}
                 <motion.div
@@ -317,26 +316,7 @@ const SectionTentang = () => {
             </motion.div>
 
             {/* Enhanced Subtitle */}
-            <AnimatedElement direction="left" delay={0.6} duration={1.0}>
-              <motion.h3 
-                className="text-xl md:text-2xl lg:text-3xl font-semibold italic mb-6 -mt-4 relative text-gray-600"
-                whileHover={{ 
-                  scale: 1.02,
-                  color: "#374151",
-                  transition: { duration: 0.2 }
-                }}
-              >
-                创立历史
-                
-                {/* Subtitle underline */}
-                <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-green-400 to-transparent rounded-full"
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                />
-              </motion.h3>
-            </AnimatedElement>
+
           </div>
         </AnimatedElement>
 

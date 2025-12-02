@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-const SectionPendidikanChinese = () => {
+const SectionPendidikanChinese4 = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [paragraphsVisible, setParagraphsVisible] = useState([]);
@@ -64,7 +64,7 @@ const SectionPendidikanChinese = () => {
   const paragraphColors = [
     "from-yellow-500/20 to-amber-500/10 border-yellow-400/40",
     "from-emerald-500/20 to-green-500/10 border-emerald-400/40",
-    "from-blue-500/20 to-indigo-500/10 border-blue-400/40"
+    "from-teal-500/20 to-cyan-500/10 border-teal-400/40"
   ];
 
   return (
@@ -104,7 +104,7 @@ const SectionPendidikanChinese = () => {
         <svg width="100" height="100" className="absolute inset-0 w-full h-full">
           <defs>
             <pattern
-              id="education-pattern"
+              id="education-pattern-4"
               x="0"
               y="0"
               width="100"
@@ -117,7 +117,7 @@ const SectionPendidikanChinese = () => {
               <path d="M50 30 L60 40 L50 50 L40 40 Z" fill="#f59e0b" opacity="0.3" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#education-pattern)" />
+          <rect width="100%" height="100%" fill="url(#education-pattern-4)" />
         </svg>
       </div>
 
@@ -153,9 +153,9 @@ const SectionPendidikanChinese = () => {
               lineHeight: "1.3"
             }}
           >
-            情系华文，聚首巴淡：
+            华文教育·华文教师证书
             <br className="hidden sm:block" />
-            <span className="block sm:inline">为印尼华文教育设立函授教学点</span>
+            <span className="block sm:inline">培训班圆满举行</span>
           </h2>
 
           {/* Enhanced divider */}
@@ -221,7 +221,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[0]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-yellow-400/50 backdrop-blur-sm">
-                      印尼和谐文化协会成立之初、印尼华文教育仍普遍面临发展缓慢、师资薄弱与资源匮乏等挑战。2010年、在暨南大学华文学院印尼万隆教学点负责人陈清章前辈的引荐下、本会于巴淡市设立了暨南大学华文学院在印尼廖内省及廖内群岛省的首个华文教育专业本科函授教学点、成为该校在印尼设立的第十个函授教学点。
+                      为不断提升印尼廖内省、廖内群岛省及周边地区华文教师的综合素质与教学能力、推动华文教育向标准化、规范化、专业化方向发展、印尼和谐文化协会承办了由印尼全国华教联合秘书处主办的"华文教育·华文教师证书"培训班。培训于2017至2018年分别在印尼廖内省实拉班让镇、北干巴鲁市和苏南省巨港市圆满举行、由中国海外交流协会遴选中国专家团赴印尼实施"培训、考核、认证"三位一体的专业师资培训。
                     </p>
                   </div>
 
@@ -236,7 +236,7 @@ const SectionPendidikanChinese = () => {
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[1]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
                     <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-emerald-400/50 backdrop-blur-sm">
-                      同年、本会成功举办首期面授课程、由暨南大学华文学院海外教学部主任张礼博士和邵长超老师授课。首期面授课程共开设《现代汉语词汇》《现代汉语语音》《初级汉语》《中国概况》四门科目、采用为期一周、每日上下午授课的集中教学方式。参加首期面授的近30名学员、多为来自巴淡市及周边城市的中小学教师。能够直接接受来自中国专业教师的课堂指导、学员们倍感兴奋、纷纷表示收获良多。
+                      三场培训班的授课专家团阵容强大、分别来自中国多所知名院校与教育机构：包括西北师范大学的李华副教授、刘晓玲教授和杨福亮博士；泰山学院、青岛大学的秦存刚教授以及国际教育学院的高珊老师、孙海平老师；广西华侨学校的优秀高级教师寇美睿老师、殷语泽老师和蒙淑老师、共同为培训提供高质量的专业指导。
                     </p>
                   </div>
 
@@ -250,8 +250,8 @@ const SectionPendidikanChinese = () => {
                     }`}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${paragraphColors[2]} rounded-xl sm:rounded-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300`}></div>
-                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-blue-400/50 backdrop-blur-sm">
-                      在开学典礼上、张礼博士系统介绍了暨南大学在印尼设立华文教育专业教学点的总体情况。他指出、暨南大学创办于1906年、是由中国国务院侨务办公室与教育部领导的综合性大学、并入选国家面向21世纪重点建设的百所高校之一。华文教育专业致力于面向海外培养华文师资及教育教学管理人才、招生对象包括在职华文教师及有志投身华文教育事业的各界人士。学员顺利完成学业者可获得暨南大学本科毕业证书、符合相关规定者还可获得教育学学士学位。
+                    <p className="relative p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border-l-4 border-teal-400/50 backdrop-blur-sm">
+                      近300名华文教师参加了培训班。培训期间，学员们与导师互动热烈、课堂气氛积极而融洽。多数学员表示受益匪浅、无论是经验丰富的华文教师、还是刚入行的青年教师、都从课程中获得了实质提升。学员们亦对主办与承办单位的热心组织与细心安排表示由衷感谢、并鼓励未能参加培训班的华文教师把握未来机会、持续提升教学水平、推动印尼华文教育不断向前。
                     </p>
                   </div>
                 </div>
@@ -275,4 +275,4 @@ const SectionPendidikanChinese = () => {
   );
 };
 
-export default SectionPendidikanChinese;
+export default SectionPendidikanChinese4;
